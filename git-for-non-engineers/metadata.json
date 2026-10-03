@@ -1,0 +1,28 @@
+{
+  "title": "Git超入門｜AI開発で「戻れる場所」を作る",
+  "slug": "git-for-non-engineers",
+  "type": "knowledge-html",
+  "visibility": "public",
+  "category": "IT・AI",
+  "tags": [
+    "Git",
+    "GitHub",
+    "Codex",
+    "Cloudflare",
+    "AI開発",
+    "commit",
+    "push",
+    "diff",
+    ".gitignore",
+    "初心者"
+  ],
+  "summary": "非エンジニアがAI開発で安全にGitを使うために、Git・GitHub・Codex・Cloudflareの違い、commit/push/diff、秘密情報、復旧の考え方を中学生でも追える構造で図解。",
+  "level": "入門〜実務基礎",
+  "createdAt": "2026-10-03",
+  "updatedAt": "2026-10-03",
+  "githubRepo": "knowledge-html",
+  "githubPath": "git-for-non-engineers/",
+  "publicUrl": "https://avenirplus.github.io/knowledge-html/git-for-non-engineers/",
+  "sourceType": "x-post+conversation",
+  "sourceSummary": "ユーザー提供のX記事『小学生でもわかるgit入門』を素材に、非エンジニアがChatGPT/Codex・GitHub・Cloudflareを使う実務を想定して、転載ではなく結論→全体像→詳細の順に再設計。"
+}
