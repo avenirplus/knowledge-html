@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Git超入門｜AI開発で「戻れる場所」を作る</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">LEVEL 1｜30秒</span>
+    <h1>Gitは、AI開発の<br><em>「セーブポイント」</em></h1>
+    <p class="lead">コードを書けなくても大丈夫。まずは「何を保存し、どこへ送り、どう戻れるか」だけ分かれば使えます。</p>
+    <div class="audio"><button onclick="speakSection('summary')">▶ 要点を聞く</button><button onclick="stopSpeech()">■ 停止</button><label>速度 <input id="rate" type="range" min=".7" max="3" step=".1" value="1"><b id="rateValue">1.0×</b></label></div>
+  </div>
+</header>
+<main class="wrap">
+<section id="summary" class="card key">
+<h2>一言でいうと</h2>
+<p class="big">Git（ギット）＝ <strong>ファイルの変更履歴を残して、前の状態へ戻れるようにする仕組み</strong>。</p>
+<div class="flow"><div>正常な状態<br><small>いま動いている</small></div><b>→</b><div class="save">COMMIT<br><small>セーブ</small></div><b>→</b><div>AIが修正<br><small>Codexなど</small></div><b>→</b><div>DIFF<br><small>変更を見る</small></div><b>→</b><div>確認して<br>次へ</div></div>
+<div class="notice important"><b>必須</b> AIに大きな修正をさせる前に、正常な状態をGitで残す。壊れても「記憶」ではなく実物の履歴から戻れます。</div>
+</section>
+
+<section>
+<span class="badge">LEVEL 2｜3〜5分</span><h2>まず4つを区別しよう</h2>
+<div class="four">
+<article><span>1</span><h3>Git</h3><p>変更履歴を管理する仕組み。</p><strong>ゲーム機のセーブ機能</strong></article>
+<article><span>2</span><h3>GitHub</h3><p>Gitで管理したコードや履歴をネット上で保管・共有するサービス。</p><strong>セーブデータの保管庫</strong></article>
+<article><span>3</span><h3>Codex / AI</h3><p>あなたの指示を受け、コードを読んだり直したりする作業者。</p><strong>作業をする人</strong></article>
+<article><span>4</span><h3>Cloudflare</h3><p>Webアプリを配信・実行したり、Accessで入口を守ったりできる基盤。</p><strong>お客さんが使う場所</strong></article>
+</div>
+<div class="flow vertical">
+<div>あなた「ここを直したい」</div><b>↓</b><div>Codex / AI がファイルを修正</div><b>↓</b><div>Git が変更履歴を管理</div><b>↓</b><div>GitHub にコード・履歴を保存</div><b>↓</b><div>Cloudflare がWebとして配信・実行</div>
+</div>
+<div class="notice caution"><b>注意</b> <strong>GitHubがPrivateでも、公開したWebサイトまで自動でPrivateになるわけではありません。</strong> ソースコードの公開範囲とWebサイトのアクセス制限は別です。</div>
+</section>
+
+<section>
+<h2>Gitの「3つの場所」</h2>
+<p>スーパーの買い物で考えると理解しやすいです。ただし比喩のあとに本当の名前も覚えます。</p>
+<div class="three">
+<article><div class="icon">棚</div><h3>① Working Tree</h3><p>いつもの作業フォルダ。AIやあなたが実際にファイルを書き換える場所。</p></article>
+<div class="arrow">→ <small>git add</small></div>
+<article><div class="icon">かご</div><h3>② Staging Area</h3><p>「次のセーブに入れる変更」を選んで置く場所。</p></article>
+<div class="arrow">→ <small>git commit</small></div>
+<article><div class="icon">記録帳</div><h3>③ Repository</h3><p>コミットされた履歴を保存する場所。ここにセーブポイントが積み上がる。</p></article>
+</div>
+<p class="note">※「リポジトリ」はレジそのものではなく、Gitが履歴を保存している場所です。</p>
+</section>
+
+<section>
+<h2>commit と push は違う</h2>
+<div class="compare">
+<div><h3>COMMIT</h3><p>Gitにセーブポイントを作る。</p><code>git commit</code><small>この時点ではGitHubに届いていない場合があります。</small></div>
+<div class="plus">→</div>
+<div><h3>PUSH</h3><p>コミットをGitHubへ送る。</p><code>git push</code><small>ネット上のGitHub側へ反映します。</small></div>
+</div>
+<div class="notice"><b>覚え方</b> commit＝セーブ ／ push＝GitHubへ送信。</div>
+</section>
+
+<section>
+<h2>AI開発での安全な一本道</h2>
+<ol class="steps">
+<li><b>現在地を確認</b><span>git status / いま未保存の変更がないかを見る</span></li>
+<li><b>正常なら修正前commit</b><span>「ここまでは動いていた」という戻り地点を残す</span></li>
+<li><b>AIに修正を依頼</b><span>Codexなどが必要なファイルを変更</span></li>
+<li><b>diff（差分）を確認</b><span>頼んだ所以外まで変わっていないかを見る</span></li>
+<li><b>実際にテスト</b><span>見た目だけでなく、変更した機能を操作して確認</span></li>
+<li><b>修正後commit</b><span>正常になった新しい状態をセーブ</span></li>
+<li><b>push → deploy → 本番確認</b><span>GitHubへ送り、Cloudflare反映後、実際のURLで確認</span></li>
+</ol>
+</section>
+
+<section>
+<h2>「変更した」と「完成した」は別</h2>
+<div class="statusline"><span>コード変更</span><i>→</i><span>commit</span><i>→</i><span>push</span><i>→</i><span>deploy</span><i>→</i><span class="ok">本番確認 ✓</span></div>
+<p>たとえば「GitHubにpushした」だけなら、Cloudflare上の本番が正常に動くことまでは確認できていません。工程を分けて考えます。</p>
+</section>
+
+<section class="dangerbox">
+<h2>最重要：秘密をGitに入れない</h2>
+<p>APIキー、パスワード、<code>SESSION_SECRET</code>、秘密鍵などは、Gitに記録しないのが基本です。</p>
+<div class="file"><b>.gitignore</b><pre>.env
+.env.local
+node_modules/</pre></div>
+<p><strong>.gitignore</strong> は「このファイルはGitの記録対象にしないで」という除外リストです。</p>
+<div class="notice danger"><b>危険</b> 秘密情報を一度commitすると、今のファイルを削除しても過去の履歴に残ることがあります。漏えいの可能性がある場合は、削除だけで終わらせず鍵の無効化・再発行を検討します。</div>
+</section>
+
+<section>
+<span class="badge">LEVEL 3｜しっかり理解</span><h2>非エンジニアが読めれば十分な8コマンド</h2>
+<div class="tablewrap"><table><thead><tr><th>コマンド</th><th>やさしい意味</th><th>正式な役割</th></tr></thead><tbody>
+<tr><td><code>git status</code></td><td>今どうなってる？</td><td>作業ツリーとステージの状態確認</td></tr>
+<tr><td><code>git diff</code></td><td>何が変わった？</td><td>変更差分の表示</td></tr>
+<tr><td><code>git add</code></td><td>次のセーブに入れる</td><td>変更をステージする</td></tr>
+<tr><td><code>git commit</code></td><td>セーブする</td><td>履歴として記録</td></tr>
+<tr><td><code>git log</code></td><td>過去のセーブを見る</td><td>コミット履歴の表示</td></tr>
+<tr><td><code>git push</code></td><td>GitHubへ送る</td><td>リモートへコミットを送信</td></tr>
+<tr><td><code>git pull</code></td><td>GitHub側の変更を取る</td><td>リモート変更の取得・統合</td></tr>
+<tr><td><code>git init</code></td><td>Git管理を始める</td><td>Gitリポジトリを初期化</td></tr>
+</tbody></table></div>
+<div class="notice caution"><b>注意</b> <code>reset</code>、<code>restore</code>、<code>clean</code> など「戻す・消す」操作は、意味を確認せずコピペしない。まず <code>git status</code> と <code>git diff</code> で現在地を確認します。</div>
+</section>
+
+<section>
+<h2>あなたが判断すること / AIに任せること</h2>
+<div class="split">
+<div><h3>あなたが決める</h3><ul><li>何を作る・直すか</li><li>変更を正式採用するか</li><li>Public / Private</li><li>重要データを削除してよいか</li><li>本番仕様を変えてよいか</li></ul></div>
+<div><h3>AIに任せやすい</h3><ul><li>status・diff確認</li><li>stage・commit</li><li>commitメッセージ作成</li><li>push</li><li>テスト実行</li><li>エラー調査</li></ul></div>
+</div>
+<p class="big center"><strong>操作はAIに任せても、重要な意思決定は人が持つ。</strong></p>
+</section>
+
+<section>
+<h2>よくある誤解</h2>
+<details><summary>「commitした＝完成」？</summary><p>違います。commitは履歴を残しただけです。push、deploy、本番確認は別工程です。</p></details>
+<details><summary>「GitHub Private＝WebサイトもPrivate」？</summary><p>違います。GitHubは主にソースコード側の公開範囲。Webサイト側はCloudflare Accessなど、配信側のアクセス制御を別に考えます。</p></details>
+<details><summary>「AIに“元に戻して”と言えばGitはいらない」？</summary><p>危険です。AIの記憶や推測ではなく、実際のコミット履歴を正本として戻せることがGitの強みです。</p></details>
+<details><summary>「AI作業前は何でも全部commit」？</summary><p>まずstatusで未完成変更や秘密情報が混ざっていないか確認します。「正常な戻り地点」を作ることが目的です。</p></details>
+</section>
+
+<section id="quiz">
+<h2>1分理解チェック</h2>
+<div class="quiz"><p><b>Q1.</b> commitしたら必ずGitHubにも保存される？</p><button onclick="reveal(this)">答えを見る</button><p class="answer">いいえ。GitHubへ送る操作は push です。</p></div>
+<div class="quiz"><p><b>Q2.</b> AIが修正したあと、まず見るとよいものは？</p><button onclick="reveal(this)">答えを見る</button><p class="answer">diff（差分）。頼んだ変更以外が混ざっていないか確認します。</p></div>
+<div class="quiz"><p><b>Q3.</b> .gitignore は何のため？</p><button onclick="reveal(this)">答えを見る</button><p class="answer">Gitに記録させたくないファイルを除外するためです。</p></div>
+<div class="quiz"><p><b>Q4.</b> GitHubがPrivateならWebサイトも自動でPrivate？</p><button onclick="reveal(this)">答えを見る</button><p class="answer">いいえ。コードの公開範囲とWebサイトへのアクセス制御は別です。</p></div>
+</section>
+
+<section class="final">
+<h2>最後にこれだけ</h2>
+<p>Gitを学ぶ目的は、コマンド暗記ではありません。</p>
+<p class="big"><strong>AIがコードを変えても、何が変わったか分かり、正常だった場所を失わず、安全に前へ進める。</strong></p>
+<p>まずは <code>status＝現在地</code>、<code>diff＝変更点</code>、<code>commit＝セーブ</code>、<code>push＝GitHubへ送る</code> の4つが分かれば十分です。</p>
+</section>
+</main>
+<footer><div class="wrap">Git超入門｜非エンジニアのAI開発基礎</div></footer>
+<script src="script.js"></script></body></html>
